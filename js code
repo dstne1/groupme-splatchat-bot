@@ -1,0 +1,702 @@
+
+const BOT_ID = '[BOT ID]';
+let payload;
+
+//{
+  const weapons = {
+    // Shooters
+    1: ["sploosh", "curling", "hammer", "shooter"],
+    2: ["sploosh neo", "beacon", "whale", "shooter"],
+    3: ["splattershot junior", "splat", "bubble", "shooter"],
+    4: ["custom splattershot junior", "torpedo", "wave", "shooter"],
+    5: ["splash", "burst", "crab", "shooter"],
+    6: ["neo splash", "suction", "strikes", "shooter"],
+    7: ["splash gcko", "mist", "storm", "shooter"],
+    8: ["aerospray mg", "fizzy", "slider", "shooter"],
+    9: ["aerospray rg", "sprinkler", "booyah", "shooter"],
+    10: ["colorz aerospray", "burst", "screen", "shooter"],
+    11: ["splattershot", "suction", "trizooka", "shooter"],
+    12: ["tentatek splattershot", "splat", "strikes", "shooter"],
+    13: ["glamorz splattershot", "burst", "kraken", "shooter"],
+    14: [".52 gal", "wall", "whale", "shooter"],
+    15: [".52 gal deco", "curling",  "screen", "shooter"],
+    16: ["n-zap 85", "suction", "cooler", "shooter"],
+    17: ["n-zap 89", "auto", "chumps", "shooter"],
+    18: ["splattershot pro", "dart", "crab", "shooter"],
+    19: ["forge splattershot pro", "suction", "booyah", "shooter"],
+    20: ["splattershot pro frzn", "splat", "missiles", "shooter"],
+    21: [".96 gal", "sprinkler", "vac", "shooter"],
+    22: [".96 gal deco", "wall", "kraken", "shooter"],
+    23: ["clawz .96 gal", "dart", "cooler", "shooter"],
+    24: ["jet squelcher", "dart", "vac", "shooter"],
+    25: ["custom jet squelcher", "mist", "storm", "shooter"],
+    26: ["jet squelcher cobr", "burst", "splashdown", "shooter"],
+    27: ["splattershot nova", "sensor", "whale", "shooter"],
+    28: ["anaki splattershot nova", "mine", "jet", "shooter"],
+    44: ["foil squeezer", "auto", "screen", "shooter"],
+    45: ["h-3 nozzlenose", "sensor", "cooler", "shooter"],
+    46: ["h-3 nozzlenose d", "wall", "bubble", "shooter"],
+    47: ["h-3 nozzlenose vip-r", "suction", "strikes", "shooter"],
+    48: ["l-3 nozzlenose", "curling", "crab", "shooter"],
+    49: ["l-3 nozzlenose d", "burst", "hammer", "shooter"],
+    50: ["glitterz l-3 nozzlenose", "splat", "jet", "shooter"],
+  
+  //done
+  //blasters
+    29: ["luna blaster", "splat", "caster", "blaster"],
+    30: ["luna blaster neo", "fizzy", "stamp", "blaster"],
+    31: ["blaster", "auto", "bubble", "blaster"],
+    32: ["custom blaster", "sensor", "splash", "blaster"],
+    33: ["range blaster", "suction", "wave", "blaster"],
+    34: ["custom range blaster", "splat", "kraken", "blaster"],
+    35: ["gleamz blaster", "beakon", "crab", "blaster"],
+    36: ["rapid blaster", "mine", "strikes", "blaster"],
+    37: ["rapid blaster deco", "torpedo", "jet", "blaster"],
+    38: ["rapid blaster pro", "mist", "vac", "blaster"],
+    39: ["rapid blaster pro deco", "dart", "whale", "blaster"],
+    40: ["rapid blaster pro wntr", "suction", "cooler", "blaster"],
+    41: ["clash blaster", "splat", "zooka", "blaster"],
+    42: ["clash blaster neo", "curling", "chumps", "blaster"],
+    43: ["squeezer", "wall", "zooka", "shooter"],
+  
+  
+  
+  //done
+  //rollers
+    51: ["carbon roller", "auto", "caster", "roller"],
+    52: ["carbon roller deco", "burst", "zooka", "roller"],
+    53: ["carbon roller angl", "fizzy", "chumps", "roller"],
+    54: ["splat roller", "curling", "bubble", "roller"],
+    55: ["krak-on splat roller", "beakon", "kraken", "roller"],
+    56: ["dynamo roller", "sprinkler", "cooler", "roller"],
+    57: ["gold dynamo roller", "splat", "chumps", "roller"],
+    58: ["starz dynamo roller", "sensor", "whale", "roller"],
+    59: ["flingza roller", "mine", "missiles", "roller"],
+    60: ["foil flingza roller", "suction", "screen", "roller"],
+    61: ["big swig roller", "wall", "vac", "roller"],
+    62: ["big swig roller express", "dart", "storm", "roller"],
+    63: ["planetz big swig roller", "torpedo", "splashdown", "roller"],
+  
+  
+  //done
+  // Chargers
+  64: ["splat charger", "splat", "vac", "charger"],
+  65: ["splat charger camo", "sprinkler", "crab", "charger"],
+  66: ["z+f splat charger", "wall", "strikes", "charger"],
+  67: ["splatterscope", "splat", "vac","charger"],
+  68: ["splatterscope camo", "sprinkler", "crab", "charger"],
+  69: ["z+f splatterscope", "wall", "strikes", "charger"],
+  70: ["e-liter 4k", "mine", "wave", "charger"],
+  71: ["custom e-liter 4k", "beakon", "kraken", "charger"],
+  72: ["e-liter 4k scope", "mine", "wave", "charger"],
+  73: ["custom e-liter 4k scope", "beakon", "kraken", "charger"],
+  74: ["goo tuber", "torpedo", "missiles", "charger"],
+  75: ["custom goo tuber", "fizzy", "hammer", "charger"],
+  76: ["bamboozler 14 mk i", "auto", "whale", "charger"],
+  77: ["bamboozler 14 mk ii", "fizzy", "chumps", "charger"],
+  78: ["snipewriter 5h", "sprinkler", "cooler", "charger"],
+  79: ["snipewriter 5b", "wall", "storm", "charger"],
+  
+  //done
+  // Sloshers
+  80: ["slosher", "splat", "strikes", "slosher"],
+  81: ["slosher deco", "dart", "caster", "slosher"],
+  82: ["tri-slosher", "toxic mist", "jet", "slosher"],
+  83: ["tri-slosher nouveau", "fizzy", "cooler", "slosher"],
+  84: ["sloshing machine", "fizzy", "booyah", "slosher"],
+  85: ["sloshing machine neo", "sensor", "zooka", "slosher"],
+  86: ["bloblobber", "sprinkler", "storm", "slosher"],
+  87: ["bloblobber deco", "dart", "kraken", "slosher"],
+  88: ["explosher", "sensor", "storm", "slosher"],
+  89: ["custom explosher", "wall", "splash", "slosher"],
+  90: ["dread wringer", "suction", "slider", "slosher"],
+  91: ["dread wringer dogwater", "beakon", "wave", "slosher"],
+  92: ["hornz dread wringer", "curling", "crab", "slosher"],
+  
+    //done
+  // Dualies
+    93: ["splat dualies", "suction", "crab", "dualie"],
+    94: ["enperry splat dualies", "curling", "splashdown", "dualie"],
+    95: ["dualie squelchers", "splat", "wave", "dualie"],
+    96: ["custom dualie squelchers", "beakon", "chumps", "dualie"],
+    97: ["hoofz dualie squelchers", "sensor", "screen", "dualie"],
+    98: ["twinklez splat dualies", "fizzy", "bubbler", "dualie"],
+    99: ["dark tetra dualies", "auto", "slider", "dualie"],
+    100: ["light tetra dualies", "sprinkler", "caster", "dualie"],
+    101: ["dapple dualies", "beakon", "cooler", "dualie"],
+    102: ["dapple dualies nouveau", "torpedo", "slider", "dualie"],
+    103: ["dapple dualies noct", "splat", "whale", "dualie"],
+    104: ["glooga dualies", "wall", "booyah", "dualie"],
+    105: ["glooga dualies deco", "sensor", "zooka", "dualie"],
+    106: ["douser dualies", "mine", "whale", "dualie"],
+    107: ["douser dualies ff", "burst", "strikes", "dualie"],
+  
+    // Brellas
+    108: ["splat brella", "sprinkler", "instrike", "brella"],
+    109: ["sorella brella", "auto", "jet", "brella"],
+    110: ["tenta brella", "beakon", "vac", "brella"],
+    111: ["tenta sorella brella", "mine", "trizooka", "brella"],
+    112: ["tenta brella crem", "mist", "chumps", "brella"],
+    113: ["undercover brella", "mine", "slider", "brella"],
+    114: ["undercover sorella brella", "torpedo", "screen", "brella"],
+    115: ["patternz undercover brella", "curling", "whale", "brella"],
+    116: ["recycled brella 24 mk i", "dart", "bubble", "brella"],
+    117: ["recycled brella 24 mk ii", "mist", "splashdown", "brella"],
+  
+  //done
+    // Stringers
+   118: ["tri-stringer", "mist", "whale", "stringer"],
+  119: ["inkline tri-stringer", "sprinkler", "chumps", "stringer"],
+  120: ["bulbz tri-stringer", "dart", "jet", "stringer"],
+  121: ["reef-lux", "curling", "missiles", "stringer"],
+  122: ["reef-lux deco", "wall", "slider", "stringer"],
+  123: ["reef-lux milk", "torpedo", "booyah", "stringer"],
+  124: ["wellstring", "auto", "hammer", "stringer"],
+  125: ["custom wellstring", "sensor", "wave", "stringer"],
+  
+  //done
+    // Splatanas
+  126: ["splatana wiper", "torpedo", "hammer", "splatana"],
+  127: ["splatana wiper deco", "beakon", "missiles", "splatana"],
+  128: ["splatana wiper rust", "curling", "zooka", "splatana"],
+  129: ["splatana stamper", "burst", "caster", "splatana"],
+  130: ["splatana stamper nouveau", "mist", "crab", "splatana"],
+  131: ["stickerz splatana stamper", "auto", "booyah", "splatana"],
+  132: ["mint decavitator", "suction", "bubble", "splatana"],
+  133: ["charcoal decavitator", "wall", "jet", "splatana"],
+  
+  //done
+    // Brushes
+  134: ["inkbrush", "splat", "whale", "brush"],
+  135: ["inkbrush nouveau", "mine", "hammer", "brush"],
+  136: ["octobrush", "suction", "caster", "brush"],
+  137: ["octobrush nouveau", "beakon", "ink storm", "brush"],
+  138: ["painbrush", "curling", "wave", "brush"],
+  139: ["painbrush nouveau", "sensor", "missiles", "brush"],
+  140: ["cometz octobrush", "auto", "kraken", "brush"],
+  141: ["painbrush brnz", "wall", "zooka", "brush"],
+  
+  //splatlings
+  142: ["heavy splatling", "sprinkler", "wave", "splatling"],
+  143: ["heavy splatling deco", "sensor", "kraken", "splatling"],
+  144: ["hydra splatling", "auto", "booyah", "splatling"],
+  145: ["custom hydra splatling", "mine", "screen", "splatling"],
+  146: ["mini splatling", "burst", "hammer", "splatling"],
+  147: ["nautilus 47", "sensor", "storm", "splatling"],
+  148: ["ballpoint splatling", "fizzy", "jet", "splatling"],
+  149: ["ballpoint splatling nouveau", "mine", "vac", "splatling"],
+  150: ["zink mini splatling", "mist", "bubble", "splatling"],
+  151: ["nautilus 79", "mist", "bubble", "splatling"],
+  152: ["mini splatling rtlr", "beakon", "zooka", "splatling"],
+  153: ["torrentz hydra splatling", "sprinkler", "bubble", "splatling"],
+  154: ["heavy edit splatling", "curling", "cooler", "splatling"],
+  155: ["heavy edit splatling nouveau", "splat", "crab", "splatling"],
+  156: ["mini splatling rtlr", "beakon", "zooka", "splatling"],
+  
+  //the poor forgotten sblasts
+  157: ["s-blast 92", "sprinkler", "slider", "blaster"],
+  158: ["s-blast 91", "burst", "booyah", "blaster"],
+  };
+//}
+
+async function respond() {
+  const response = await fetch('https://api.groupme.com/v3/bots/post', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  console.log('GroupMe response:', await response.text());
+  return { statusCode: 202, body: 'Accepted' };
+}
+
+
+export const handler = async (event) => {
+  try {
+    const body = JSON.parse(event.body || '{}');
+
+    if (!body || !body.text) {
+      return { statusCode: 400, body: 'Invalid request' };
+    }
+
+    //dont recieve messsages from bots
+    if (body.sender_type === 'bot') {
+      return { statusCode: 200, body: 'Ignored bot message' };
+    }
+
+
+    //a thing for random weapon generation
+    function rw2() {
+      const values = Object.values(weapons);
+      const randomIndex = Math.floor(Math.random() * values.length);
+      const weapon = values[randomIndex];
+      return weapon[0];
+    }
+    
+    function rwByClass(cls) {
+      const values = Object.values(weapons);
+      const list = values.filter(w => w[3] === cls).map(w => w[0]);
+      return list[Math.floor(Math.random() * list.length)];
+    }
+    
+    function rwBySub(sub) {
+      const values = Object.values(weapons);
+      const list = values.filter(w => w[1] === sub).map(w => w[0]);
+      return list[Math.floor(Math.random() * list.length)];
+    }
+    
+    function rwBySpecial(special) {
+      const values = Object.values(weapons);
+      const list = values.filter(w => w[2] === special).map(w => w[0]);
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    //retrieve message
+    const text = body.text.toLowerCase();
+
+    //eliminate non commands
+    if (text.startsWith('!')){
+
+      if (text.startsWith('!help')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `Available commands:\n!hi: say hi!,\n!srmaps: current salmon run maps,
+  !festmaps: current splatfest rotation, \n!anarchymaps: current anarchy open and series maps,
+  !xmaps: current x rank maps\n!allmaps: lists all maps and modes\n!rweapon: generates random weapon from s3,
+  !rweapon:[sub, special, class]: gives a random weapon of a specific sub/special/class,
+  !credit: lists all credits for this project,\n!todo: see the current objectives for this bot,
+  !help: you're using it!\n**note that at any time commands may not work as this project is in beta: contact dstne for help**`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //get random weapon
+      if (text.startsWith('!rweapon') || text.startsWith('!rw')) {
+        if (text.includes(':')) {
+          // Extract the argument after :
+          const name = text.split(':')[1].trim().toLowerCase();
+      
+          // Known lists
+          const classes = ["shooter", "roller", "charger", "slosher", "blaster", "dualies", "brella", "stringer", "splatana", "splatling"];
+          const subs = ["splat", "burst", "curling", "auto", "mine", "torpedo", "fizzy", "sensor", "sprinkler", "suction", "dart"];
+          const specials = ["zooka", "jet", "kraken", "crab", "booyah", "slider", "missiles", "storm", "bubble", "wave", "caster", "chumps", "cooler"];
+      
+          let weaponName = "";
+          let type = "invalid";
+      
+          if (classes.includes(name)) {
+            weaponName = rwByClass(name);
+            type = "class";
+          } else if (subs.includes(name)) {
+            weaponName = rwBySub(name);
+            type = "sub";
+          } else if (specials.includes(name)) {
+            weaponName = rwBySpecial(name);
+            type = "special";
+          }
+      
+          if (type === "invalid") {
+            payload = {
+              bot_id: BOT_ID,
+              text: `Invalid type or name "${name}". Use !wtypes for valid options.`,
+              attachments: [{ type: 'reply', reply_id: body.id, base_reply_id: body.id }],
+            };
+          } else {
+            payload = {
+              bot_id: BOT_ID,
+              text: `Your random ${name} weapon: ${weaponName}`,
+              attachments: [{ type: 'reply', reply_id: body.id, base_reply_id: body.id }],
+            };
+          }
+      
+          await respond();
+        } else {
+          const weaponName = rw2();
+          payload = {
+            bot_id: BOT_ID,
+            text: `Your random weapon: ${weaponName}`,
+            attachments: [{ type: 'reply', reply_id: body.id, base_reply_id: body.id }],
+          };
+          await respond();
+        }
+      }
+
+      if(text.startsWith('!wtypes')){
+        payload = {
+          bot_id: BOT_ID,
+          text: `subs: dart, splat, burst, suction, beakon, sensor, torpedo, auto, sprinkler, wall, curling, mine, mist
+          \nspecials: crab, storm, slider, booyah, strikes, jet, vac, caster, kraken, zooka, screen, bubble, cooler, hammer, missiles
+          \nclasses: shooter, dualie, blaster, splatling, stringer, slosher, roller, brush, splatana, charger, brella`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //all my credits
+      if(text.startsWith('!credit')){
+        payload = {
+          bot_id: BOT_ID,
+          text: `made by dstne!\ncredit to: groupme api\noatmeal dome\nthe open gm community\nthe splatoon3. ink api\nand stat. ink\nver. 1.0`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //smth
+      if(text.startsWith('!todo')){
+        payload = {
+          bot_id: BOT_ID,
+          text: `add generating random weapon by class\nadd an off command to stop it remotely`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //hewwooo
+      if (text.startsWith('!hi')) {
+        const responses = ['hey!','wassup','im here','..','yello!'];
+        const response = responses[Math.floor(Math.random() * responses.length)];
+        if(Math.random(1,1000)>980){
+          response = 'hewwwoooo!!';
+        }
+        payload = {
+          bot_id: BOT_ID,
+          text: response,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //ehehhehe
+      if (text.startsWith('!jager')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `ehehe`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //shhh
+      if (text.startsWith('!secret')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `its a secret from everybody`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //just silli
+      if (text.startsWith('!woomy')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `n\'gyes!`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+      
+      //jager's suggestion
+      if (text.startsWith('!gold')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `WE'RE RICH!! MUSHROOM!!`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //gh
+      if (text.startsWith('!gh')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `🍀`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //fin
+      if (text.startsWith('!fin')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `you can have his kidney, I dont want it`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+      
+      //dang you qwandry :P
+      if (text.startsWith('!bluechara')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `dagnabbit qwandry, I dont stinking know cw3!!!`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      if (text.startsWith('!doublea')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `AA`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //bot
+      if (text.startsWith('!clanker') || text.startsWith('!bot')) {
+        payload = {
+          bot_id: BOT_ID,
+          text: `CLANKER!!!!`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+        await respond();
+      }
+
+      //splatfest rotation
+      if (text.startsWith('!festmaps')) {
+        const response = await fetch('https://splatoon3.ink/data/schedules.json');
+        const data = await response.json();
+      
+        // Grab the Splatfest schedules
+        const festSchedules = data.data.festSchedules.nodes;
+      
+        if (!festSchedules || festSchedules.length === 0) {
+          payload = {
+            bot_id: BOT_ID,
+            text: 'No splatfest schedules available right now.',
+            attachments: [{ type: 'reply', reply_id: body.id, base_reply_id: body.id }],
+          };
+          await respond();
+          return;
+        }
+        // Pick the first entry — it's the current or next rotation
+        const currentFest = festSchedules[0];
+        const festPro = currentFest.festMatchSettings[0]; // pro
+        const festOpen = currentFest.festMatchSettings[1]; // casual
+      
+        // Example: you can display the Regular rotation
+        const rule = festOpen.vsRule.name;
+        const openStages = festOpen.vsStages.map(stage => stage.name).join(' & ');
+        const proStages = festPro.vsStages.map(stage => stage.name).join(' & ');
+        const start = currentFest.startTime;
+        const end = currentFest.endTime;
+      
+        // Format a message
+        payload = {
+          bot_id: BOT_ID,
+          text: `Current Splatfest Rotation: ${rule}\nOpen Maps: ${openStages}\nPro Maps: ${proStages}`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+      
+        await respond();
+      }
+
+      //turf rotation
+      if (text.startsWith('!turfmaps') || text.startsWith('!tmaps')) {
+        const response = await fetch('https://splatoon3.ink/data/schedules.json');
+        const data = await response.json();
+      
+        // Grab the Splatfest schedules
+        const turfSchedules = data.data.regularSchedules.nodes;
+      
+        // Pick the first entry — it's the current or next rotation
+        const currentRot = turfSchedules[0];
+        const turf = currentRot.regularMatchSetting; // pro
+      
+        
+        const rule = turf.vsRule.name;
+        const turfStages = turf.vsStages.map(stage => stage.name).join(' & ');
+        // const proStages = festPro.vsStages.map(stage => stage.name).join(' & ');
+        const start = currentRot.startTime;
+        const end = currentRot.endTime;
+      
+        // Format a message
+        payload = {
+          bot_id: BOT_ID,
+          text: `Current Turf Rotation: ${rule}\nTurf Maps: ${turfStages}`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+      
+        await respond();
+      }
+
+      //anarchy
+      if (text.startsWith('!anarchymaps') || text.startsWith('!amaps')) {
+        const response = await fetch('https://splatoon3.ink/data/schedules.json');
+        const data = await response.json();
+      
+        // Grab the anarchy schedules
+        const anaSchedules = data.data.bankaraSchedules.nodes;
+      
+        // Pick the first entry — it's the current or next rotation
+        const currentRot = anaSchedules[0];
+        const open = currentRot.bankaraMatchSettings[0]; //open
+        const series = currentRot.bankaraMatchSettings[1]; //series
+      
+        const orule = open.vsRule.name;
+        const srule = series.vsRule.name;
+        const oStages = open.vsStages.map(stage => stage.name).join(' & ');
+        const sStages = series.vsStages.map(stage => stage.name).join(' & ');
+        // const proStages = festPro.vsStages.map(stage => stage.name).join(' & ');
+        const start = currentRot.startTime;
+        const end = currentRot.endTime;
+      
+        // Format a message
+        payload = {
+          bot_id: BOT_ID,
+          text: `Current Anarchy Rotation:\nOpen Mode: ${orule}\nOpen Maps: ${oStages} \nSeries Mode: ${srule}\nSeries Maps: ${sStages} \n`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+      
+        await respond();
+      }
+
+      //the x rank
+      if (text.startsWith('!xmaps')) {
+        const response = await fetch('https://splatoon3.ink/data/schedules.json');
+        const data = await response.json();
+      
+        // Grab the Splatfest schedules
+        const xSchedules = data.data.xSchedules.nodes;
+      
+        // Pick the first entry — it's the current or next rotation
+        const currentRot = xSchedules[0];
+        const xrank = currentRot.xMatchSetting; // pro
+      
+        
+        const rule = xrank.vsRule.name;
+        const xStages = xrank.vsStages.map(stage => stage.name).join(' & ');
+        const start = currentRot.startTime;
+        const end = currentRot.endTime;
+      
+        // Format a message
+        payload = {
+          bot_id: BOT_ID,
+          text: `Current X Rank Rotation: ${rule}\nX Maps: ${xStages}`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+      
+        await respond();
+      }
+
+      //all maps
+      if (text.startsWith('!allmaps')) {
+        const response = await fetch('https://splatoon3.ink/data/schedules.json');
+        const data = await response.json();
+      
+        // all the schedules
+        const turfSchedules = data.data.regularSchedules.nodes;
+        const anaSchedules = data.data.bankaraSchedules.nodes;
+        const xSchedules = data.data.xSchedules.nodes;
+
+        // turf rotation
+        const turfRot = turfSchedules[0];
+        const turf = turfRot.regularMatchSetting; 
+      
+        //anarchy rotation
+        const anaRot = anaSchedules[0];
+        const open = anaRot.bankaraMatchSettings[0]; //open
+        const series = anaRot.bankaraMatchSettings[1]; //series
+
+        //x rotation
+        const xRot = xSchedules[0];
+        const xrank = xRot.xMatchSetting;
+        
+        //turf
+        const tRule = turf.vsRule.name;
+        const tStages = turf.vsStages.map(stage => stage.name).join(' & ');
+        //x 
+        const xRule = xrank.vsRule.name;
+        const xStages = xrank.vsStages.map(stage => stage.name).join(' & ');
+        //open/series
+        const oRule = open.vsRule.name;
+        const sRule = series.vsRule.name;
+        const oStages = open.vsStages.map(stage => stage.name).join(' & ');
+        const sStages = series.vsStages.map(stage => stage.name).join(' & ');
+      
+        // Format a message
+        payload = {
+          bot_id: BOT_ID,
+          text: `Current Map Rotations: \nTurf Maps: ${tStages}\n\nOpen Mode: ${oRule}\nOpen Maps: ${oStages}\n\nSeries Mode: ${sRule}\nSeries Maps: ${sStages}\n\nX Mode: ${xRule}\nX Maps: ${xStages}`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+      
+        await respond();
+      }
+
+      //sr rotation
+      if (text.startsWith('!salmonmaps')||text.startsWith('!srmaps')) {
+        const response = await fetch('https://splatoon3.ink/data/schedules.json');
+        const data = await response.json();
+      
+        // Grab the Splatfest schedules
+        const srSchedules = data.data.coopGroupingSchedule.regularSchedules.nodes;
+      
+        const shift = data.data.coopGroupingSchedule.regularSchedules.nodes[0];
+        const stage = shift.setting.coopStage.name;
+        const weapons = shift.setting.weapons.map(w => w.name).join(', ') 
+      
+        // Format a message
+        payload = {
+          bot_id: BOT_ID,
+          text: `Current Salmon Rotation:\nMap: ${stage}\nWeapons: ${weapons}`,
+          attachments: [
+            { type: 'reply', reply_id: body.id, base_reply_id: body.id },
+          ],
+        };
+      
+        await respond();
+      }
+    }
+
+    return { statusCode: 200, body: 'OK' };
+  
+    
+  } catch (error) {
+    console.error('Error:', error);
+    return { statusCode: 500, body: 'Internal Server Error' };
+  }
+};
